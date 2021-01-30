@@ -1,0 +1,62 @@
+
+1.
+SELECT max(Transaction_Time) Transaction_Time,
+
+ NAV_Value * No_of_Units  AS Transaction_Value
+
+ FROM Mutual_Fund_Transaction_Table
+
+ WHERE (Transaction_Status = 'Success' AND Transaction_Type = 'Purchase')
+ORDER BY  Transaction_Value DESC
+;
+
+
+2. 
+SELECT count(Transaction_Status = 'Success') FROM Mutual_Fund_Transaction_Table
+ 
+   WHERE MONTH(Transaction_Time) = 4 
+AND YEAR(Transaction_Time) = 2019;
+
+
+3.
+SELECT COUNT(Transaction_Status = 'Success')
+FROM Mutual_Fund_Transaction_Table Customer_Details WHERE Transaction_Status = 'Success'>4 
+AND
+ Customer_Details.Transaction_Time=MONTH(Transaction_Time) = 1 AND
+ Customer_Details.Transaction_Time=YEAR(Transaction_Time) = 2019 AND
+ Customer_Details.Banned=0
+;
+
+
+4.
+select gender, Customer_Name FROM Customer_Details
+
+ GROUP BY gender
+
+ UNION ALL 
+SELECT NAV_Value * No_of_Units  AS Transaction_Value
+ 
+FROM Mutual_Fund_Transaction_Table
+
+ ORDER BY Transaction_Value DESC
+
+ LIMIT 4
+;
+
+
+5.
+SELECT YEAR(Transaction_Time ),
+
+           MONTH(Transaction_Time),
+
+           COUNT(DISTINCT Customer_id )
+FROM Mutual_Fund_Transaction_Table
+
+ WHERE MONTH(Transaction_Time)=1 AND 
+
+	  YEAR(Transaction_Time)=2019 AND
+
+	  Transaction_Status='Success' 
+ GROUP BY 1, 2
+;
+
